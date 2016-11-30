@@ -51,11 +51,11 @@ void Document::pickSort(int i) {  // 0 = insertionSort, 1 = QuickSort, 2= heapSo
     	wordlist->insertionSortLL();
     }
     else if (i == 1) {
-    	wordlist->wordarr= wordlist->convertToArray();
+    	wordlist->wordarr = wordlist->convertToArray();
     	wordlist->quickSort(wordlist->wordarr, 0, (wordlist->size - 1));
     }
     else if (i == 2) {
-    	wordlist->heapSort(wordlist->convertToArray(), wordlist->size);
+    	wordlist->heapSort(wordlist->wordarr, wordlist->size);
     }
 }
 void Document::readFile() {

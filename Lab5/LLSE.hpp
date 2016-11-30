@@ -20,7 +20,7 @@ class LLSE {
 	Node *first;
 	Node *last;
 	int size;
-	Node *wordarr;
+	Node **wordarr;
 
 public:
 	LLSE();
