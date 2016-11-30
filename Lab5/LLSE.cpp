@@ -81,26 +81,95 @@ void LLSE::insertUnique(string w) {
 // Write an insertion Sort on the linked list (not an array, 
 // a linked list!
 void LLSE::insertionSortLL() {
+	int i, j;
+	Node * key = new Node;
+	Node * temp = new Node;
+	temp = first;
+	for (i = 1; i < size; i++) {
+		key = first->next;
+		for (j = i - 1; j >= 0 && temp < key; j--) {
+			temp->next = temp;
+		}
+		temp->next = key;
+	}
 }
+
 
 // Convert the linked list to an array of nodes and return that array
 Node *LLSE::convertToArray() {
+	Node * temp = new Node;
+	temp = first;
+	Node * arr = new Node[size];
+	for (int i = 0; i < size; i++) {
+		arr[i] = temp;
+		temp = temp->next;
+	}
+	return arr;
 }
 
 // For the quicksort - the partition
-int LLSE::partition(int beg,int end) {
+int LLSE::partition(Node ** arr, int beg,int end) {
+	string pivot = arr[end]->count;
+	int i = beg - 1;
+	string temp;
+	string temp2;
+	for (int j = beg; j <= end - 1; j++) {
+		if (arr[j]->count <= pivot) {
+			i += 1;
+			temp = arr[i]->word;
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
+	}
+	temp2 = arr[i + 1]->word;
+	arr[i + 1] = arr[end];
+	arr[end] = temp2;
+	return i + 1;
 }
 
 
 // your recursive quicksort
-void LLSE::quickSort( int beg, int end) {
+void LLSE::quickSort(Node ** arr, int beg, int end) {
+	if (beg < end) {
+		int mark = partition(arr, beg, end);
+		quickSort(arr, beg, mark - 1);
+		quickSort(arr, mark + 1, end);
+	}
 }
 
 //Take the linked list and create a binary heap
-Node *LLSE::makeHeap() {
+Node *LLSE::makeHeap(Node ** arr, int s, int root) {
+	int max = root;
+	int left = (2 * root) + 1;
+	int right = (2 * root) + 2;
+
+	if (left < s && arr[left]->count > arr[max]->count) {
+		max = left;
+	}
+	if (right < s && arr[right]->count > arr[max]->count) {
+		max = right;
+	}
+	if (max != root) {
+		Node * temp = new Node;
+		temp = arr[root];
+		arr[root] = arr[max];
+		arr[max] = temp;
+		makeHeap(arr, s, max);
+	}
+	return arr;
 }
 
 //Sort the heap array using heapsort
-void LLSE::heapSort() {
+void LLSE::heapSort(Node ** arr, int s) {
+	for (int i = (s / 2) - 1; i >= 0; i--) {
+		makeHeap(arr, s, i);
+	}
+	for (int j = s - 1; j >= 0; j--) {
+		Node * temp = new temp;
+		temp = arr[j];
+		arr[j] = arr[0];
+		arr[0] = temp;
+		makeHeap(arr, j, 0);
+	}
 }
 

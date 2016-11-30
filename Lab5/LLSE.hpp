@@ -29,12 +29,12 @@ public:
 	void addFirst(string x);
 	void addAtFirst(string x);
 	void insertUnique(string w);
-	void quickSort(int x, int y);
-	int partition(int beg,int end);
+	void quickSort(Node ** arr, int x, int y);
+	int partition(Node ** arr, int beg,int end);
 	Node *convertToArray();
 	void insertionSortLL();
-	Node *makeHeap();
-	void heapSort();
+	Node *makeHeap(Node ** arr, int s, int root);
+	void heapSort(Node ** arr, int s);
 };
 
 #endif /* LLSE_HPP_ */

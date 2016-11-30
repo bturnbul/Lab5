@@ -20,7 +20,6 @@ Node::Node() {
 	count = 1;
 	next = NULL;
 	prev = NULL;
-	word = s;
 }
 
 
